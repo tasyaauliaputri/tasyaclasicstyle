@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kelola Penjualan - Tasya Classic Style</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8fb;
+            color: #342a2f;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #292329;
+            padding: 25px 18px;
+            overflow-y: auto;
+        }
+
+        .logo {
+            text-align: center;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #51464d;
+        }
+
+        .logo h1 {
+            font-family: Georgia, serif;
+            color: #e49ab3;
+            font-size: 25px;
+        }
+
+        .logo p {
+            color: #cdbfc5;
+            font-size: 9px;
+            letter-spacing: 3px;
+            margin-top: 5px;
+        }
+
+        .menu-title {
+            color: #a99aa1;
+            font-size: 10px;
+            font-weight: bold;
+            margin: 25px 10px 10px;
+            letter-spacing: 2px;
+        }
+
+        .menu a {
+            display: block;
+            color: #eee3e8;
+            text-decoration: none;
+            padding: 13px 15px;
+            margin-bottom: 5px;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+
+        .menu a:hover,
+        .menu a.aktif {
+            background: #d47796;
+            color: white;
+        }
+
+        .logout {
+            margin-top: 20px;
+            border-top: 1px solid #51464d;
+            padding-top: 20px;
+        }
+
+        .logout a {
+            color: #f0b2c6 !important;
+        }
+
+        /* CONTENT */
+
+        .content {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 80px;
+            background: white;
+            border-bottom: 1px solid #eadde3;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 35px;
+        }
+
+        .topbar h2 {
+            font-family: Georgia, serif;
+            font-size: 25px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fcecf3;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-info strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .user-info span {
+            color: #927b84;
+            font-size: 11px;
+        }
+
+        /* MAIN */
+
+        main {
+            padding: 35px;
+        }
+
+        .judul {
+            margin-bottom: 25px;
+        }
+
+        .judul h1 {
+            font-family: Georgia, serif;
+            font-size: 32px;
+        }
+
+        .judul p {
+            color: #756970;
+            font-size: 13px;
+            margin-top: 7px;
+        }
+
+        /* RINGKASAN */
+
+        .ringkasan {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #eadde3;
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background: #fcecf3;
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #927b84;
+            font-size: 11px;
+        }
+
+        .card h3 {
+            font-family: Georgia, serif;
+            font-size: 23px;
+            margin-top: 5px;
+        }
+
+        /* TOOLBAR */
+
+        .toolbar {
+            background: white;
+            border: 1px solid #eadde3;
+            border-radius: 18px;
+            padding: 18px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .cari {
+            width: 350px;
+            padding: 12px 15px;
+
+            border: 1px solid #e5c5d0;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .filter {
+            padding: 12px 15px;
+
+            border: 1px solid #e5c5d0;
+            border-radius: 10px;
+
+            outline: none;
+        }
+
+        /* TABLE */
+
+        .table-box {
+            background: white;
+            border: 1px solid #eadde3;
+            border-radius: 18px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1050px;
+        }
+
+        th {
+            background: #fcecf3;
+            color: #6e4e5a;
+
+            padding: 15px;
+            text-align: left;
+
+            font-size: 12px;
+        }
+
+        td {
+            padding: 15px;
+
+            border-bottom: 1px solid #eee2e7;
+
+            font-size: 12px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .nomor {
+            font-weight: bold;
+            color: #bd5e7e;
+        }
+
+        .pelanggan {
+            font-weight: bold;
+        }
+
+        .tanggal {
+            color: #756970;
+        }
+
+        .total {
+            font-weight: bold;
+            color: #bd5e7e;
+        }
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .menunggu {
+            background: #fff1d8;
+            color: #a87522;
+        }
+
+        .diproses {
+            background: #e9e5ff;
+            color: #6656a8;
+        }
+
+        .dikirim {
+            background: #e5f1ff;
+            color: #4775a8;
+        }
+
+        .selesai {
+            background: #e8f6ed;
+            color: #438157;
+        }
+
+        .dibatalkan {
+            background: #f9e3e3;
+            color: #b84b4b;
+        }
+
+        .btn-detail {
+            border: none;
+            background: #fcecf3;
+            color: #bd5e7e;
+
+            padding: 8px 12px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .btn-detail:hover {
+            background: #d47796;
+            color: white;
+        }
+
+        /* MODAL */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+            inset: 0;
+
+            background: rgba(40, 30, 35, 0.45);
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 999;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 500px;
+
+            background: white;
+            border-radius: 20px;
+
+            padding: 30px;
+        }
+
+        .modal-box h2 {
+            font-family: Georgia, serif;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee2e7;
+
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .detail-item span:first-child {
+            color: #927b84;
+        }
+
+        .detail-item span:last-child {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .tutup {
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 12px;
+
+            border: none;
+
+            border-radius: 20px;
+
+            background: #d47796;
+            color: white;
+
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1000px) {
+
+            .ringkasan {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .cari {
+                width: 100%;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            .ringkasan {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <h1>
+            Tasya Classic Style
+        </h1>
+
+        <p>
+            ZONA USER / ADMIN
+        </p>
+
+    </div>
+
+
+    <div class="menu">
+
+        <div class="menu-title">
+            DASHBOARD
+        </div>
+
+        <a href="dashboarduser.html">
+            🏠 Dashboard
+        </a>
+
+
+        <div class="menu-title">
+            PENGELOLAAN
+        </div>
+
+        <a href="kelolauser.html">
+            👤 Kelola User
+        </a>
+
+        <a href="kelolapelanggan.html">
+            🛍️ Kelola Pelanggan
+        </a>
+
+        <a href="kelolakategori.html">
+            🏷️ Kelola Kategori
+        </a>
+
+        <a href="kelolaproduk.html">
+            👗 Kelola Produk
+        </a>
+
+        <a href="kelolapenjualan.html" class="aktif">
+            🧾 Kelola Penjualan
+        </a>
+
+        <a href="keloladiskon.html">
+            🎁 Kelola Diskon
+        </a>
+
+
+        <div class="menu-title">
+            LAPORAN
+        </div>
+
+        <a href="laporan.html">
+            📊 Laporan
+        </a>
+
+
+        <div class="logout">
+
+            <a href="../landing/loginuser.html">
+                🚪 Keluar
+            </a>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- CONTENT -->
+
+<div class="content">
+
+    <header class="topbar">
+
+        <h2>
+            Kelola Penjualan
+        </h2>
+
+        <div class="user-info">
+
+            <div class="user-icon">
+                👤
+            </div>
+
+            <div>
+
+                <strong>
+                    User Admin
+                </strong>
+
+                <span>
+                    Pengelola Sistem
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <div class="judul">
+
+            <h1>
+                Kelola Penjualan
+            </h1>
+
+            <p>
+                Melihat dan mengatur transaksi penjualan
+                Tasya Classic Style.
+            </p>
+
+        </div>
+
+
+        <!-- RINGKASAN -->
+
+        <div class="ringkasan">
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🧾
+                </div>
+
+                <p>
+                    Total Pesanan
+                </p>
+
+                <h3>
+                    36
+                </h3>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    💰
+                </div>
+
+                <p>
+                    Total Penjualan
+                </p>
+
+                <h3>
+                    Rp5,4 Jt
+                </h3>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    ⏳
+                </div>
+
+                <p>
+                    Menunggu
+                </p>
+
+                <h3>
+                    5
+                </h3>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    ✅
+                </div>
+
+                <p>
+                    Selesai
+                </p>
+
+                <h3>
+                    27
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- TOOLBAR -->
+
+        <div class="toolbar">
+
+            <input
+                type="text"
+                id="cari"
+                class="cari"
+                placeholder="Cari nomor pesanan atau pelanggan..."
+                onkeyup="cariPenjualan()"
+            >
+
+
+            <select
+                id="filter"
+                class="filter"
+                onchange="filterStatus()"
+            >
+
+                <option value="semua">
+                    Semua Status
+                </option>
+
+                <option value="Menunggu">
+                    Menunggu
+                </option>
+
+                <option value="Diproses">
+                    Diproses
+                </option>
+
+                <option value="Dikirim">
+                    Dikirim
+                </option>
+
+                <option value="Selesai">
+                    Selesai
+                </option>
+
+                <option value="Dibatalkan">
+                    Dibatalkan
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <div class="table-box">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            No
+                        </th>
+
+                        <th>
+                            Nomor Pesanan
+                        </th>
+
+                        <th>
+                            Pelanggan
+                        </th>
+
+                        <th>
+                            Tanggal
+                        </th>
+
+                        <th>
+                            Produk
+                        </th>
+
+                        <th>
+                            Total
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Aksi
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="dataPenjualan">
+
+                    <tr>
+
+                        <td class="nomor">
+                            1
+                        </td>
+
+                        <td>
+                            TCS-001
+                        </td>
+
+                        <td class="pelanggan">
+                            Aulia
+                        </td>
+
+                        <td class="tanggal">
+                            10 Agustus 2026
+                        </td>
+
+                        <td>
+                            Classic Blouse
+                        </td>
+
+                        <td class="total">
+                            Rp129.000
+                        </td>
+
+                        <td>
+                            <span class="status selesai">
+                                Selesai
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="btn-detail"
+                                onclick="lihatDetail(this)"
+                            >
+                                Detail
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="nomor">
+                            2
+                        </td>
+
+                        <td>
+                            TCS-002
+                        </td>
+
+                        <td class="pelanggan">
+                            Sinta
+                        </td>
+
+                        <td class="tanggal">
+                            11 Agustus 2026
+                        </td>
+
+                        <td>
+                            Korean Knit Top
+                        </td>
+
+                        <td class="total">
+                            Rp149.000
+                        </td>
+
+                        <td>
+                            <span class="status diproses">
+                                Diproses
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="btn-detail"
+                                onclick="lihatDetail(this)"
+                            >
+                                Detail
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="nomor">
+                            3
+                        </td>
+
+                        <td>
+                            TCS-003
+                        </td>
+
+                        <td class="pelanggan">
+                            Nabila
+                        </td>
+
+                        <td class="tanggal">
+                            12 Agustus 2026
+                        </td>
+
+                        <td>
+                            Classic Wide Pants
+                        </td>
+
+                        <td class="total">
+                            Rp179.000
+                        </td>
+
+                        <td>
+                            <span class="status menunggu">
+                                Menunggu
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="btn-detail"
+                                onclick="lihatDetail(this)"
+                            >
+                                Detail
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="nomor">
+                            4
+                        </td>
+
+                        <td>
+                            TCS-004
+                        </td>
+
+                        <td class="pelanggan">
+                            Dinda
+                        </td>
+
+                        <td class="tanggal">
+                            12 Agustus 2026
+                        </td>
+
+                        <td>
+                            Vintage Cardigan
+                        </td>
+
+                        <td class="total">
+                            Rp199.000
+                        </td>
+
+                        <td>
+                            <span class="status dikirim">
+                                Dikirim
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="btn-detail"
+                                onclick="lihatDetail(this)"
+                            >
+                                Detail
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="nomor">
+                            5
+                        </td>
+
+                        <td>
+                            TCS-005
+                        </td>
+
+                        <td class="pelanggan">
+                            Rani
+                        </td>
+
+                        <td class="tanggal">
+                            13 Agustus 2026
+                        </td>
+
+                        <td>
+                            Hijab Basic Set
+                        </td>
+
+                        <td class="total">
+                            Rp159.000
+                        </td>
+
+                        <td>
+                            <span class="status dibatalkan">
+                                Dibatalkan
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="btn-detail"
+                                onclick="lihatDetail(this)"
+                            >
+                                Detail
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- MODAL DETAIL -->
+
+<div
+    class="modal"
+    id="modal"
+>
+
+    <div class="modal-box">
+
+        <h2>
+            Detail Pesanan
+        </h2>
+
+
+        <div class="detail-item">
+
+            <span>
+                Nomor Pesanan
+            </span>
+
+            <span id="detailNomor">
+                -
+            </span>
+
+        </div>
+
+
+        <div class="detail-item">
+
+            <span>
+                Pelanggan
+            </span>
+
+            <span id="detailPelanggan">
+                -
+            </span>
+
+        </div>
+
+
+        <div class="detail-item">
+
+            <span>
+                Tanggal
+            </span>
+
+            <span id="detailTanggal">
+                -
+            </span>
+
+        </div>
+
+
+        <div class="detail-item">
+
+            <span>
+                Produk
+            </span>
+
+            <span id="detailProduk">
+                -
+            </span>
+
+        </div>
+
+
+        <div class="detail-item">
+
+            <span>
+                Total
+            </span>
+
+            <span id="detailTotal">
+                -
+            </span>
+
+        </div>
+
+
+        <div class="detail-item">
+
+            <span>
+                Status
+            </span>
+
+            <span id="detailStatus">
+                -
+            </span>
+
+        </div>
+
+
+        <button
+            class="tutup"
+            onclick="tutupModal()"
+        >
+            Tutup
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    function lihatDetail(tombol) {
+
+        let baris =
+            tombol.closest("tr");
+
+        document.getElementById("detailNomor").innerText =
+            baris.cells[1].innerText;
+
+        document.getElementById("detailPelanggan").innerText =
+            baris.cells[2].innerText;
+
+        document.getElementById("detailTanggal").innerText =
+            baris.cells[3].innerText;
+
+        document.getElementById("detailProduk").innerText =
+            baris.cells[4].innerText;
+
+        document.getElementById("detailTotal").innerText =
+            baris.cells[5].innerText;
+
+        document.getElementById("detailStatus").innerText =
+            baris.cells[6].innerText;
+
+
+        document.getElementById("modal").style.display =
+            "flex";
+
+    }
+
+
+    function tutupModal() {
+
+        document.getElementById("modal").style.display =
+            "none";
+
+    }
+
+
+    function cariPenjualan() {
+
+        let input =
+            document.getElementById("cari")
+            .value
+            .toLowerCase();
+
+        let baris =
+            document.querySelectorAll(
+                "#dataPenjualan tr"
+            );
+
+
+        baris.forEach(function(row) {
+
+            let teks =
+                row.innerText.toLowerCase();
+
+            if (teks.includes(input)) {
+
+                row.style.display = "";
+
+            } else {
+
+                row.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+
+    function filterStatus() {
+
+        let pilihan =
+            document.getElementById("filter").value;
+
+        let baris =
+            document.querySelectorAll(
+                "#dataPenjualan tr"
+            );
+
+
+        baris.forEach(function(row) {
+
+            let status =
+                row.cells[6].innerText.trim();
+
+
+            if (
+                pilihan === "semua" ||
+                status === pilihan
+            ) {
+
+                row.style.display = "";
+
+            } else {
+
+                row.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+</script>
+
+</body>
+</html>

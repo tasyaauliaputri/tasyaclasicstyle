@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard User - Tasya Classic Style</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8fb;
+            color: #342a2f;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 250px;
+            height: 100vh;
+
+            background: #292329;
+            padding: 25px 18px;
+
+            overflow-y: auto;
+        }
+
+        .logo {
+            text-align: center;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #51464d;
+        }
+
+        .logo h1 {
+            font-family: Georgia, serif;
+            color: #e49ab3;
+            font-size: 25px;
+        }
+
+        .logo p {
+            color: #cdbfc5;
+            font-size: 9px;
+            letter-spacing: 3px;
+            margin-top: 5px;
+        }
+
+        .menu-title {
+            color: #a99aa1;
+            font-size: 10px;
+            font-weight: bold;
+            margin: 25px 10px 10px;
+            letter-spacing: 2px;
+        }
+
+        .menu a {
+            display: block;
+
+            color: #eee3e8;
+            text-decoration: none;
+
+            padding: 13px 15px;
+            margin-bottom: 5px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+        }
+
+        .menu a:hover,
+        .menu a.aktif {
+            background: #d47796;
+            color: white;
+        }
+
+        .logout {
+            margin-top: 20px;
+            border-top: 1px solid #51464d;
+            padding-top: 20px;
+        }
+
+        .logout a {
+            color: #f0b2c6 !important;
+        }
+
+        /* CONTENT */
+
+        .content {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        /* TOPBAR */
+
+        .topbar {
+            height: 80px;
+            background: white;
+            border-bottom: 1px solid #eadde3;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 35px;
+        }
+
+        .topbar h2 {
+            font-family: Georgia, serif;
+            font-size: 25px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-icon {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+            background: #fcecf3;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 19px;
+        }
+
+        .user-info div:last-child {
+            font-size: 12px;
+        }
+
+        .user-info strong {
+            display: block;
+            color: #342a2f;
+        }
+
+        .user-info span {
+            color: #927b84;
+        }
+
+        /* MAIN */
+
+        main {
+            padding: 35px;
+        }
+
+        .selamat {
+            background: linear-gradient(
+                135deg,
+                #fcecf3,
+                #fff5f8
+            );
+
+            border: 1px solid #edc4d2;
+
+            border-radius: 22px;
+
+            padding: 28px;
+
+            margin-bottom: 30px;
+        }
+
+        .selamat h1 {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            color: #bd5e7e;
+        }
+
+        .selamat p {
+            color: #756970;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        /* STATISTIK */
+
+        .judul-section {
+            font-family: Georgia, serif;
+            font-size: 23px;
+            margin-bottom: 18px;
+        }
+
+        .statistik {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card {
+            background: white;
+
+            border: 1px solid #eadde3;
+
+            border-radius: 18px;
+
+            padding: 22px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+
+            border-radius: 14px;
+
+            background: #fcecf3;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 24px;
+        }
+
+        .stat-card h3 {
+            font-size: 23px;
+            color: #bd5e7e;
+        }
+
+        .stat-card p {
+            color: #756970;
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        /* AKSES CEPAT */
+
+        .akses {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .akses-card {
+            background: white;
+
+            border: 1px solid #eadde3;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            text-decoration: none;
+
+            color: #342a2f;
+
+            transition: 0.3s;
+        }
+
+        .akses-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 10px 25px rgba(90, 45, 65, 0.08);
+
+            border-color: #d47796;
+        }
+
+        .akses-card .icon {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .akses-card h3 {
+            font-family: Georgia, serif;
+            font-size: 20px;
+        }
+
+        .akses-card p {
+            color: #756970;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 6px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 40px;
+
+            background: #292329;
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+        }
+
+        footer p {
+            color: #cdbfc5;
+            font-size: 11px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1100px) {
+
+            .statistik {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .akses {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 750px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            .topbar {
+                padding: 15px 20px;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+        }
+
+        @media (max-width: 550px) {
+
+            .statistik,
+            .akses {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar h2 {
+                font-size: 20px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <h1>
+            Tasya Classic Style
+        </h1>
+
+        <p>
+            ZONA USER / ADMIN
+        </p>
+
+    </div>
+
+
+    <div class="menu">
+
+        <div class="menu-title">
+            DASHBOARD
+        </div>
+
+        <a
+            href="dashboarduser.html"
+            class="aktif"
+        >
+            🏠 Dashboard
+        </a>
+
+
+        <div class="menu-title">
+            PENGELOLAAN
+        </div>
+
+        <a href="kelolauser.html">
+            👤 Kelola User
+        </a>
+
+        <a href="kelolapelanggan.html">
+            🛍️ Kelola Pelanggan
+        </a>
+
+        <a href="kelolakategori.html">
+            🏷️ Kelola Kategori
+        </a>
+
+        <a href="kelolaproduk.html">
+            👗 Kelola Produk
+        </a>
+
+        <a href="kelolapenjualan.html">
+            🧾 Kelola Penjualan
+        </a>
+
+        <a href="keloladiskon.html">
+            🎁 Kelola Diskon
+        </a>
+
+
+        <div class="menu-title">
+            LAPORAN
+        </div>
+
+        <a href="laporan.html">
+            📊 Laporan
+        </a>
+
+
+        <div class="logout">
+
+            <a href="../landing/loginuser.html">
+                🚪 Keluar
+            </a>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- CONTENT -->
+
+<div class="content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <h2>
+            Dashboard User
+        </h2>
+
+        <div class="user-info">
+
+            <div class="user-icon">
+                👤
+            </div>
+
+            <div>
+
+                <strong>
+                    User Admin
+                </strong>
+
+                <span>
+                    Pengelola Sistem
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+
+        <!-- SELAMAT DATANG -->
+
+        <section class="selamat">
+
+            <h1>
+                Selamat Datang 👋
+            </h1>
+
+            <p>
+                Kelola Tasya Classic Style
+                melalui halaman admin ini.
+            </p>
+
+        </section>
+
+
+        <!-- STATISTIK -->
+
+        <h2 class="judul-section">
+            Ringkasan Data
+        </h2>
+
+
+        <section class="statistik">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <h3>
+                        12
+                    </h3>
+
+                    <p>
+                        Total User
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🛍️
+                </div>
+
+                <div>
+
+                    <h3>
+                        45
+                    </h3>
+
+                    <p>
+                        Pelanggan
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👗
+                </div>
+
+                <div>
+
+                    <h3>
+                        28
+                    </h3>
+
+                    <p>
+                        Produk
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🧾
+                </div>
+
+                <div>
+
+                    <h3>
+                        36
+                    </h3>
+
+                    <p>
+                        Penjualan
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- AKSES CEPAT -->
+
+        <h2 class="judul-section">
+            Menu Pengelolaan
+        </h2>
+
+
+        <section class="akses">
+
+
+            <a
+                href="kelolauser.html"
+                class="akses-card"
+            >
+
+                <div class="icon">
+                    👤
+                </div>
+
+                <h3>
+                    Kelola User
+                </h3>
+
+                <p>
+                    Mengatur data user
+                    yang memiliki akses
+                    ke sistem.
+                </p>
+
+            </a>
+
+
+            <a
+                href="kelolapelanggan.html"
+                class="akses-card"
+            >
+
+                <div class="icon">
+                    🛍️
+                </div>
+
+                <h3>
+                    Kelola Pelanggan
+                </h3>
+
+                <p>
+                    Mengatur data pelanggan
+                    Tasya Classic Style.
+                </p>
+
+            </a>
+
+
+            <a
+                href="kelolakategori.html"
+                class="akses-card"
+            >
+
+                <div class="icon">
+                    🏷️
+                </div>
+
+                <h3>
+                    Kelola Kategori
+                </h3>
+
+                <p>
+                    Mengatur kategori
+                    produk fashion.
+                </p>
+
+            </a>
+
+
+            <a
+                href="kelolaproduk.html"
+                class="akses-card"
+            >
+
+                <div class="icon">
+                    👗
+                </div>
+
+                <h3>
+                    Kelola Produk
+                </h3>
+
+                <p>
+                    Menambah, mengubah,
+                    dan menghapus produk.
+                </p>
+
+            </a>
+
+
+            <a
+                href="kelolapenjualan.html"
+                class="akses-card"
+            >
+
+                <div class="icon">
+                    🧾
+                </div>
+
+                <h3>
+                    Kelola Penjualan
+                </h3>
+
+                <p>
+                    Melihat dan mengatur
+                    data penjualan.
+                </p>
+
+            </a>
+
+
+            <a
+                href="keloladiskon.html"
+                class="akses-card"
+            >
+
+                <div class="icon">
+                    🎁
+                </div>
+
+                <h3>
+                    Kelola Diskon
+                </h3>
+
+                <p>
+                    Mengatur promo dan
+                    diskon produk.
+                </p>
+
+            </a>
+
+
+            <a
+                href="laporan.html"
+                class="akses-card"
+            >
+
+                <div class="icon">
+                    📊
+                </div>
+
+                <h3>
+                    Laporan
+                </h3>
+
+                <p>
+                    Melihat ringkasan
+                    laporan usaha.
+                </p>
+
+            </a>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Tasya Classic Style
+            • Zona User / Admin
+        </p>
+
+    </footer>
+
+
+</div>
+
+</body>
+</html>

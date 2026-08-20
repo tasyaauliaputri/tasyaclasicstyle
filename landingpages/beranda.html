@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Beranda - Tasya Classic Style</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8fb;
+            color: #342a2f;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #eadde3;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1250px;
+            margin: auto;
+            min-height: 92px;
+            padding: 15px 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #bd5e7e;
+            min-width: 250px;
+        }
+
+        .logo h1 {
+            font-family: Georgia, serif;
+            font-size: 28px;
+            margin-bottom: 4px;
+        }
+
+        .logo p {
+            color: #927b84;
+            font-size: 10px;
+            letter-spacing: 5px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #40373b;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #d47796;
+        }
+
+        .login {
+            border: 1px solid #d47796;
+            color: #c45f80 !important;
+            padding: 11px 20px;
+            border-radius: 25px;
+        }
+
+        .daftar {
+            background: #d47796;
+            color: white !important;
+            padding: 11px 22px;
+            border-radius: 25px;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 690px;
+            position: relative;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at 88% 25%,
+                    #f2c8d8 0,
+                    #f2c8d8 145px,
+                    transparent 146px
+                ),
+                linear-gradient(
+                    135deg,
+                    #fffafd,
+                    #fcecf3
+                );
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            right: -160px;
+            top: 150px;
+
+            background: #f3d2df;
+
+            border-radius: 50%;
+
+            opacity: 0.55;
+        }
+
+        .hero-content {
+            width: 90%;
+            max-width: 1000px;
+
+            text-align: center;
+
+            position: relative;
+            z-index: 2;
+
+            padding: 70px 20px;
+        }
+
+        .welcome {
+            color: #cf6686;
+            font-size: 13px;
+            font-weight: bold;
+
+            letter-spacing: 5px;
+
+            margin-bottom: 25px;
+        }
+
+        .hero h2 {
+            font-family: Georgia, serif;
+
+            font-size: clamp(48px, 7vw, 82px);
+
+            line-height: 1.05;
+
+            color: #33292e;
+        }
+
+        .hero h2 span {
+            color: #c96182;
+            font-style: italic;
+        }
+
+        .hero-description {
+            max-width: 760px;
+
+            margin: 30px auto;
+
+            color: #746970;
+
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+
+        /* ================= BUTTON ================= */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 15px;
+
+            margin-top: 35px;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 16px 30px;
+
+            border-radius: 30px;
+
+            text-decoration: none;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .btn-pink {
+            background: #d47796;
+            color: white;
+
+            box-shadow: 0 8px 20px rgba(212, 119, 150, 0.25);
+        }
+
+        .btn-outline {
+            background: white;
+            color: #c45f80;
+
+            border: 1px solid #d47796;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+
+        /* ================= KOLEKSI ================= */
+
+        .collection {
+            max-width: 1150px;
+            margin: 0 auto;
+
+            padding: 75px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title small {
+            color: #d47796;
+            letter-spacing: 4px;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .section-title h3 {
+            font-family: Georgia, serif;
+
+            font-size: 40px;
+
+            margin-top: 10px;
+        }
+
+        .section-title p {
+            color: #796d73;
+            margin-top: 10px;
+        }
+
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+        }
+
+        .card {
+            min-height: 270px;
+
+            padding: 28px;
+
+            border-radius: 22px;
+
+            border: 1px solid #eddde4;
+
+            background: white;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 15px 35px rgba(80, 40, 60, 0.09);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+
+            border-radius: 20px;
+
+            background: #fde6ef;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 35px;
+
+            margin-bottom: 25px;
+        }
+
+        .card h4 {
+            font-family: Georgia, serif;
+
+            font-size: 25px;
+
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #786c72;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+        .card a {
+            text-decoration: none;
+
+            color: #cf6686;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-top: 20px;
+        }
+
+
+        /* ================= PILIH GAYA ================= */
+
+        .style-section {
+            background: #fcecf3;
+
+            padding: 75px 25px;
+        }
+
+        .style-content {
+            max-width: 1050px;
+
+            margin: auto;
+
+            text-align: center;
+        }
+
+        .style-content h3 {
+            font-family: Georgia, serif;
+
+            font-size: 40px;
+        }
+
+        .style-content p {
+            color: #756970;
+
+            margin-top: 10px;
+        }
+
+        .style-buttons {
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 30px;
+        }
+
+        .style-buttons a {
+            text-decoration: none;
+
+            background: white;
+
+            color: #bd5e7e;
+
+            border: 1px solid #edc4d2;
+
+            padding: 13px 23px;
+
+            border-radius: 25px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .style-buttons a:hover {
+            background: #d47796;
+
+            color: white;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #292329;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 40px 20px;
+        }
+
+        footer h3 {
+            font-family: Georgia, serif;
+
+            color: #e49ab3;
+
+            font-size: 25px;
+        }
+
+        footer p {
+            color: #cdbfc5;
+
+            font-size: 12px;
+
+            margin-top: 8px;
+        }
+
+        .footer-links {
+            margin-top: 18px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 18px;
+
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #eadde3;
+
+            text-decoration: none;
+
+            font-size: 12px;
+        }
+
+        .footer-links a:hover {
+            color: #e49ab3;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .navbar {
+                flex-direction: column;
+            }
+
+            .logo {
+                text-align: center;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 15px;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .hero {
+                min-height: 620px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 90%;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h3,
+            .style-content h3 {
+                font-size: 32px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header>
+
+    <div class="navbar">
+
+        <a href="../../index.html" class="logo">
+
+            <h1>
+                Tasya Classic Style
+            </h1>
+
+            <p>
+                OOTD • YOUTH • CLASSIC
+            </p>
+
+        </a>
+
+
+        <nav>
+
+            <a href="beranda.html">
+                Beranda
+            </a>
+
+            <a href="kategori.html">
+                Kategori
+            </a>
+
+            <a href="produk.html">
+                Produk
+            </a>
+
+            <a href="faq.html">
+                FAQ
+            </a>
+
+            <a href="kontak.html">
+                Kontak
+            </a>
+
+            <a href="legalitas.html">
+                Legalitas
+            </a>
+
+            <a href="loginuser.html" class="login">
+                Login User
+            </a>
+
+            <a href="registerpelanggan.html" class="daftar">
+                Daftar
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="welcome">
+            SELAMAT DATANG DI TASYA CLASSIC STYLE
+        </div>
+
+
+        <h2>
+
+            Gaya Kamu.
+
+            <br>
+
+            <span>Cerita Kamu.</span>
+
+        </h2>
+
+
+        <p class="hero-description">
+
+            Temukan outfit OOTD remaja yang
+            cute, casual, classic, dan kekinian.
+            Tampil percaya diri dengan gaya
+            yang paling menggambarkan diri kamu.
+
+        </p>
+
+
+        <div class="buttons">
+
+            <a href="produk.html"
+               class="btn btn-pink">
+
+                ✨ Lihat Koleksi
+
+            </a>
+
+
+            <a href="kategori.html"
+               class="btn btn-outline">
+
+                🎀 Pilih Gaya
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= KOLEKSI ================= -->
+
+<section class="collection">
+
+    <div class="section-title">
+
+        <small>
+            KOLEKSI TASYA
+        </small>
+
+        <h3>
+            Temukan Gaya Favoritmu
+        </h3>
+
+        <p>
+            Pilih gaya yang sesuai dengan
+            karakter dan suasana kamu.
+        </p>
+
+    </div>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div>
+
+                <div class="card-icon">
+                    🎀
+                </div>
+
+                <h4>
+                    Girly
+                </h4>
+
+                <p>
+                    Gaya manis, feminin, dan
+                    cocok untuk kamu yang suka
+                    tampil cantik dan lembut.
+                </p>
+
+            </div>
+
+            <a href="kategori.html">
+                Lihat Koleksi →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div>
+
+                <div class="card-icon">
+                    👕
+                </div>
+
+                <h4>
+                    Casual
+                </h4>
+
+                <p>
+                    Outfit sederhana dan nyaman
+                    untuk sekolah, jalan-jalan,
+                    atau kegiatan sehari-hari.
+                </p>
+
+            </div>
+
+            <a href="kategori.html">
+                Lihat Koleksi →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div>
+
+                <div class="card-icon">
+                    👗
+                </div>
+
+                <h4>
+                    Elegan
+                </h4>
+
+                <p>
+                    Gaya feminin dan classic
+                    untuk acara spesial atau
+                    momen penting.
+                </p>
+
+            </div>
+
+            <a href="kategori.html">
+                Lihat Koleksi →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div>
+
+                <div class="card-icon">
+                    🧥
+                </div>
+
+                <h4>
+                    Street
+                </h4>
+
+                <p>
+                    Gaya keren, percaya diri,
+                    dan kekinian untuk kamu
+                    yang berani tampil berbeda.
+                </p>
+
+            </div>
+
+            <a href="kategori.html">
+                Lihat Koleksi →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PILIH GAYA ================= -->
+
+<section class="style-section">
+
+    <div class="style-content">
+
+        <h3>
+            Pilih Sesuai Selera Kamu
+        </h3>
+
+        <p>
+            Klik pilihan gaya di bawah untuk
+            melihat koleksi yang kamu suka.
+        </p>
+
+
+        <div class="style-buttons">
+
+            <a href="kategori.html">
+                🎀 Girly
+            </a>
+
+            <a href="kategori.html">
+                👕 Casual
+            </a>
+
+            <a href="kategori.html">
+                👗 Elegan
+            </a>
+
+            <a href="kategori.html">
+                🧥 Street
+            </a>
+
+            <a href="kategori.html">
+                🌸 Classic
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h3>
+        Tasya Classic Style
+    </h3>
+
+    <p>
+        OOTD • YOUTH • CLASSIC
+    </p>
+
+    <div class="footer-links">
+
+        <a href="beranda.html">
+            Beranda
+        </a>
+
+        <a href="kategori.html">
+            Kategori
+        </a>
+
+        <a href="produk.html">
+            Produk
+        </a>
+
+        <a href="faq.html">
+            FAQ
+        </a>
+
+        <a href="kontak.html">
+            Kontak
+        </a>
+
+        <a href="legalitas.html">
+            Legalitas
+        </a>
+
+    </div>
+
+    <p style="margin-top:20px;">
+        © 2026 Tasya Classic Style
+    </p>
+
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detail Produk - Tasya Classic Style</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8fb;
+            color: #342a2f;
+        }
+
+        /* NAVBAR */
+
+        header {
+            background: white;
+            border-bottom: 1px solid #eadde3;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1250px;
+            margin: auto;
+            min-height: 92px;
+            padding: 15px 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #bd5e7e;
+            min-width: 250px;
+        }
+
+        .logo h1 {
+            font-family: Georgia, serif;
+            font-size: 28px;
+            margin-bottom: 4px;
+        }
+
+        .logo p {
+            color: #927b84;
+            font-size: 10px;
+            letter-spacing: 5px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #40373b;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #d47796;
+        }
+
+        .login {
+            border: 1px solid #d47796;
+            color: #c45f80 !important;
+            padding: 11px 20px;
+            border-radius: 25px;
+        }
+
+        .daftar {
+            background: #d47796;
+            color: white !important;
+            padding: 11px 22px;
+            border-radius: 25px;
+        }
+
+        /* DETAIL */
+
+        .detail-section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 70px 25px;
+        }
+
+        .breadcrumb {
+            margin-bottom: 30px;
+            font-size: 13px;
+        }
+
+        .breadcrumb a {
+            color: #c45f80;
+            text-decoration: none;
+        }
+
+        .detail-box {
+            background: white;
+            border: 1px solid #eadde3;
+            border-radius: 28px;
+            padding: 35px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+
+            box-shadow: 0 15px 40px rgba(90, 45, 65, 0.07);
+        }
+
+        /* GAMBAR PRODUK */
+
+        .product-image {
+            min-height: 500px;
+
+            border-radius: 25px;
+
+            background: linear-gradient(
+                135deg,
+                #f8dce6,
+                #fff4f8
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 180px;
+        }
+
+        /* INFORMASI */
+
+        .product-info {
+            padding: 15px 5px;
+        }
+
+        .label {
+            color: #d47796;
+            font-size: 11px;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        .product-info h2 {
+            font-family: Georgia, serif;
+            font-size: 45px;
+            margin-top: 12px;
+        }
+
+        .deskripsi {
+            color: #756970;
+            line-height: 1.8;
+            font-size: 15px;
+            margin-top: 18px;
+        }
+
+        .harga {
+            color: #c45f80;
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 25px;
+        }
+
+        /* PILIHAN */
+
+        .pilihan {
+            margin-top: 25px;
+        }
+
+        .pilihan h4 {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .pilihan-list {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+        }
+
+        .pilihan-list button {
+            border: 1px solid #e5bccb;
+            background: white;
+            color: #bd5e7e;
+
+            padding: 10px 18px;
+
+            border-radius: 20px;
+
+            cursor: pointer;
+        }
+
+        .pilihan-list button:hover,
+        .pilihan-list button.aktif {
+            background: #d47796;
+            color: white;
+        }
+
+        /* JUMLAH */
+
+        .jumlah {
+            margin-top: 25px;
+        }
+
+        .jumlah input {
+            width: 80px;
+            padding: 11px;
+
+            border: 1px solid #e5c5d0;
+            border-radius: 8px;
+
+            text-align: center;
+        }
+
+        /* BUTTON */
+
+        .aksi {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+
+            padding: 14px;
+
+            border-radius: 25px;
+
+            text-align: center;
+            text-decoration: none;
+
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .btn-beli {
+            background: #d47796;
+            color: white;
+        }
+
+        .btn-kembali {
+            border: 1px solid #d47796;
+            color: #c45f80;
+            background: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* KEUNGGULAN */
+
+        .keunggulan {
+            max-width: 1100px;
+            margin: 0 auto 70px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .keunggulan-card {
+            background: white;
+            border: 1px solid #eadde3;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .keunggulan-card .icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .keunggulan-card h3 {
+            font-family: Georgia, serif;
+            font-size: 20px;
+        }
+
+        .keunggulan-card p {
+            color: #756970;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 7px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #292329;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer h3 {
+            font-family: Georgia, serif;
+            color: #e49ab3;
+            font-size: 25px;
+        }
+
+        footer p {
+            color: #cdbfc5;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .footer-links {
+            margin-top: 18px;
+
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        .footer-links a {
+            color: #eadde3;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1000px) {
+
+            .navbar {
+                flex-direction: column;
+            }
+
+            .logo {
+                text-align: center;
+            }
+
+            .detail-box {
+                grid-template-columns: 1fr;
+            }
+
+            .keunggulan {
+                grid-template-columns: 1fr;
+                padding: 0 25px;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                gap: 12px;
+                justify-content: center;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .detail-section {
+                padding: 40px 15px;
+            }
+
+            .detail-box {
+                padding: 20px;
+            }
+
+            .product-image {
+                min-height: 350px;
+                font-size: 120px;
+            }
+
+            .product-info h2 {
+                font-size: 35px;
+            }
+
+            .aksi {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<header>
+
+    <div class="navbar">
+
+        <a href="../../index.html" class="logo">
+
+            <h1>
+                Tasya Classic Style
+            </h1>
+
+            <p>
+                OOTD • YOUTH • CLASSIC
+            </p>
+
+        </a>
+
+        <nav>
+
+            <a href="beranda.html">
+                Beranda
+            </a>
+
+            <a href="kategori.html">
+                Kategori
+            </a>
+
+            <a href="produk.html">
+                Produk
+            </a>
+
+            <a href="faq.html">
+                FAQ
+            </a>
+
+            <a href="kontak.html">
+                Kontak
+            </a>
+
+            <a href="legalitas.html">
+                Legalitas
+            </a>
+
+            <a href="loginuser.html" class="login">
+                Login User
+            </a>
+
+            <a href="registerpelanggan.html" class="daftar">
+                Daftar
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- DETAIL PRODUK -->
+
+<section class="detail-section">
+
+    <div class="breadcrumb">
+
+        <a href="produk.html">
+            Produk
+        </a>
+
+        &nbsp; / &nbsp;
+
+        Detail Produk
+
+    </div>
+
+
+    <div class="detail-box">
+
+
+        <!-- GAMBAR -->
+
+        <div class="product-image">
+
+            👗
+
+        </div>
+
+
+        <!-- INFORMASI -->
+
+        <div class="product-info">
+
+            <div class="label">
+                KOLEKSI GIRLY
+            </div>
+
+            <h2>
+                Dress Pink Manis
+            </h2>
+
+            <p class="deskripsi">
+
+                Dress dengan tampilan feminin
+                dan manis yang cocok untuk
+                acara santai, jalan-jalan,
+                maupun kegiatan spesial.
+
+                <br><br>
+
+                Bahannya nyaman digunakan
+                dan mudah dipadukan dengan
+                berbagai aksesori favorit kamu.
+
+            </p>
+
+
+            <div class="harga">
+                Rp149.000
+            </div>
+
+
+            <!-- WARNA -->
+
+            <div class="pilihan">
+
+                <h4>
+                    Pilih Warna
+                </h4>
+
+                <div class="pilihan-list">
+
+                    <button class="aktif">
+                        Pink
+                    </button>
+
+                    <button>
+                        Putih
+                    </button>
+
+                    <button>
+                        Hitam
+                    </button>
+
+                    <button>
+                        Cream
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- UKURAN -->
+
+            <div class="pilihan">
+
+                <h4>
+                    Pilih Ukuran
+                </h4>
+
+                <div class="pilihan-list">
+
+                    <button class="aktif">
+                        S
+                    </button>
+
+                    <button>
+                        M
+                    </button>
+
+                    <button>
+                        L
+                    </button>
+
+                    <button>
+                        XL
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- JUMLAH -->
+
+            <div class="jumlah">
+
+                <h4>
+                    Jumlah
+                </h4>
+
+                <input
+                    type="number"
+                    value="1"
+                    min="1"
+                >
+
+            </div>
+
+
+            <!-- AKSI -->
+
+            <div class="aksi">
+
+                <a
+                    href="produk.html"
+                    class="btn btn-kembali"
+                >
+                    ← Kembali
+                </a>
+
+                <a
+                    href="loginpelanggan.html"
+                    class="btn btn-beli"
+                >
+                    Beli Sekarang
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- KEUNGGULAN -->
+
+<section class="keunggulan">
+
+    <div class="keunggulan-card">
+
+        <div class="icon">
+            📦
+        </div>
+
+        <h3>
+            Produk Berkualitas
+        </h3>
+
+        <p>
+            Produk dipilih dengan
+            memperhatikan kualitas
+            dan kenyamanan.
+        </p>
+
+    </div>
+
+
+    <div class="keunggulan-card">
+
+        <div class="icon">
+            💕
+        </div>
+
+        <h3>
+            Cocok untuk OOTD
+        </h3>
+
+        <p>
+            Pilihan outfit yang mudah
+            dipadukan untuk berbagai
+            gaya sehari-hari.
+        </p>
+
+    </div>
+
+
+    <div class="keunggulan-card">
+
+        <div class="icon">
+            🎀
+        </div>
+
+        <h3>
+            Gaya Kekinian
+        </h3>
+
+        <p>
+            Desain yang mengikuti
+            gaya remaja dan tetap
+            terlihat classic.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>
+        Tasya Classic Style
+    </h3>
+
+    <p>
+        OOTD • YOUTH • CLASSIC
+    </p>
+
+    <div class="footer-links">
+
+        <a href="beranda.html">Beranda</a>
+
+        <a href="kategori.html">Kategori</a>
+
+        <a href="produk.html">Produk</a>
+
+        <a href="faq.html">FAQ</a>
+
+        <a href="kontak.html">Kontak</a>
+
+        <a href="legalitas.html">Legalitas</a>
+
+    </div>
+
+    <p style="margin-top:20px;">
+        © 2026 Tasya Classic Style
+    </p>
+
+</footer>
+
+
+</body>
+</html>

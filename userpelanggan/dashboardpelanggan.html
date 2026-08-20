@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pelanggan - Tasya Classic Style</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8fb;
+            color: #342a2f;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #292329;
+            padding: 25px 18px;
+        }
+
+        .logo {
+            text-align: center;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #51464d;
+        }
+
+        .logo h1 {
+            font-family: Georgia, serif;
+            color: #e49ab3;
+            font-size: 24px;
+        }
+
+        .logo p {
+            color: #cdbfc5;
+            font-size: 9px;
+            letter-spacing: 2px;
+            margin-top: 6px;
+        }
+
+        .menu-title {
+            color: #a99aa1;
+            font-size: 10px;
+            font-weight: bold;
+            margin: 25px 10px 10px;
+            letter-spacing: 2px;
+        }
+
+        .menu a {
+            display: block;
+            color: #eee3e8;
+            text-decoration: none;
+            padding: 13px 15px;
+            margin-bottom: 5px;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+
+        .menu a:hover,
+        .menu a.aktif {
+            background: #d47796;
+            color: white;
+        }
+
+        .keluar {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #51464d;
+        }
+
+        .keluar a {
+            color: #f0b2c6 !important;
+        }
+
+        .content {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 80px;
+            background: white;
+            border-bottom: 1px solid #eadde3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 35px;
+        }
+
+        .topbar h2 {
+            font-family: Georgia, serif;
+            font-size: 25px;
+        }
+
+        .profil {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .foto {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #fcecf3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .profil strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .profil span {
+            color: #927b84;
+            font-size: 11px;
+        }
+
+        main {
+            padding: 35px;
+        }
+
+        .sambutan {
+            background: linear-gradient(135deg, #fcecf3, #fff);
+            border: 1px solid #eadde3;
+            border-radius: 22px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .sambutan h1 {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .sambutan p {
+            color: #756970;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .btn-belanja {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 12px 22px;
+            background: #d47796;
+            color: white;
+            text-decoration: none;
+            border-radius: 22px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .btn-belanja:hover {
+            background: #bd5e7e;
+        }
+
+        .judul {
+            margin-bottom: 15px;
+        }
+
+        .judul h2 {
+            font-family: Georgia, serif;
+            font-size: 23px;
+        }
+
+        .judul p {
+            color: #927b84;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .ringkasan {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #eadde3;
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        .icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 11px;
+            background: #fcecf3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #927b84;
+            font-size: 11px;
+        }
+
+        .card h3 {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            margin-top: 5px;
+        }
+
+        .produk {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .produk-card {
+            background: white;
+            border: 1px solid #eadde3;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .gambar {
+            height: 170px;
+            background: #fcecf3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 55px;
+        }
+
+        .produk-info {
+            padding: 17px;
+        }
+
+        .produk-info h3 {
+            font-family: Georgia, serif;
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .produk-info p {
+            color: #927b84;
+            font-size: 11px;
+            margin-bottom: 12px;
+        }
+
+        .harga {
+            color: #bd5e7e;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .btn-detail {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 14px;
+            border: 1px solid #d47796;
+            color: #bd5e7e;
+            text-decoration: none;
+            border-radius: 18px;
+            font-size: 10px;
+        }
+
+        .btn-detail:hover {
+            background: #d47796;
+            color: white;
+        }
+
+        @media (max-width: 900px) {
+            .ringkasan,
+            .produk {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            .ringkasan,
+            .produk {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <h1>Tasya Classic Style</h1>
+        <p>ZONA PELANGGAN</p>
+    </div>
+
+    <div class="menu">
+
+        <div class="menu-title">
+            MENU UTAMA
+        </div>
+
+        <a href="dashboardpelanggan.html" class="aktif">
+            🏠 Dashboard
+        </a>
+
+        <a href="../landing/produk.html">
+            👗 Koleksi OOTD
+        </a>
+
+        <a href="../landing/kategori.html">
+            🏷️ Kategori
+        </a>
+
+        <div class="menu-title">
+            PEMBELIAN
+        </div>
+
+        <a href="riwayatpembelian.html">
+            🧾 Riwayat Pembelian
+        </a>
+
+        <div class="menu-title">
+            AKUN
+        </div>
+
+        <a href="../landing/kontak.html">
+            💌 Kontak Kami
+        </a>
+
+        <div class="keluar">
+            <a href="../landing/loginpelanggan.html">
+                🚪 Keluar
+            </a>
+        </div>
+
+    </div>
+
+</aside>
+
+
+<div class="content">
+
+    <header class="topbar">
+
+        <h2>Dashboard Pelanggan</h2>
+
+        <div class="profil">
+
+            <div class="foto">
+                👤
+            </div>
+
+            <div>
+                <strong>Tasya</strong>
+                <span>Pelanggan</span>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <section class="sambutan">
+
+            <h1>
+                Selamat Datang di Tasya Classic Style ✨
+            </h1>
+
+            <p>
+                Temukan berbagai pilihan outfit OOTD
+                dengan gaya classic, simple, dan elegan
+                yang cocok untuk berbagai kesempatan.
+            </p>
+
+            <a
+                href="../landing/produk.html"
+                class="btn-belanja"
+            >
+                Lihat Koleksi OOTD
+            </a>
+
+        </section>
+
+
+        <div class="judul">
+
+            <h2>
+                Ringkasan Akun
+            </h2>
+
+            <p>
+                Informasi aktivitas pembelian kamu.
+            </p>
+
+        </div>
+
+
+        <section class="ringkasan">
+
+            <div class="card">
+
+                <div class="icon">
+                    🛍️
+                </div>
+
+                <p>
+                    Total Pembelian
+                </p>
+
+                <h3>
+                    8
+                </h3>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">
+                    ❤️
+                </div>
+
+                <p>
+                    Produk Favorit
+                </p>
+
+                <h3>
+                    5
+                </h3>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">
+                    🎁
+                </div>
+
+                <p>
+                    Diskon Tersedia
+                </p>
+
+                <h3>
+                    3
+                </h3>
+
+            </div>
+
+        </section>
+
+
+        <div class="judul">
+
+            <h2>
+                Koleksi Pilihan
+            </h2>
+
+            <p>
+                Beberapa outfit yang sedang populer.
+            </p>
+
+        </div>
+
+
+        <section class="produk">
+
+            <div class="produk-card">
+
+                <div class="gambar">
+                    👚
+                </div>
+
+                <div class="produk-info">
+
+                    <h3>
+                        Classic Blouse
+                    </h3>
+
+                    <p>
+                        Atasan • Classic Style
+                    </p>
+
+                    <div class="harga">
+                        Rp129.000
+                    </div>
+
+                    <a
+                        href="../landing/detailproduk.html"
+                        class="btn-detail"
+                    >
+                        Lihat Detail
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="produk-card">
+
+                <div class="gambar">
+                    👖
+                </div>
+
+                <div class="produk-info">
+
+                    <h3>
+                        Classic Wide Pants
+                    </h3>
+
+                    <p>
+                        Bawahan • Casual Style
+                    </p>
+
+                    <div class="harga">
+                        Rp179.000
+                    </div>
+
+                    <a
+                        href="../landing/detailproduk.html"
+                        class="btn-detail"
+                    >
+                        Lihat Detail
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="produk-card">
+
+                <div class="gambar">
+                    🧥
+                </div>
+
+                <div class="produk-info">
+
+                    <h3>
+                        Vintage Cardigan
+                    </h3>
+
+                    <p>
+                        Outer • Vintage Style
+                    </p>
+
+                    <div class="harga">
+                        Rp199.000
+                    </div>
+
+                    <a
+                        href="../landing/detailproduk.html"
+                        class="btn-detail"
+                    >
+                        Lihat Detail
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

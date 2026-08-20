@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Laporan - Tasya Classic Style</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8fb;
+            color: #342a2f;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #292329;
+            padding: 25px 18px;
+            overflow-y: auto;
+        }
+
+        .logo {
+            text-align: center;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #51464d;
+        }
+
+        .logo h1 {
+            font-family: Georgia, serif;
+            color: #e49ab3;
+            font-size: 25px;
+        }
+
+        .logo p {
+            color: #cdbfc5;
+            font-size: 9px;
+            letter-spacing: 3px;
+            margin-top: 5px;
+        }
+
+        .menu-title {
+            color: #a99aa1;
+            font-size: 10px;
+            font-weight: bold;
+            margin: 25px 10px 10px;
+            letter-spacing: 2px;
+        }
+
+        .menu a {
+            display: block;
+            color: #eee3e8;
+            text-decoration: none;
+            padding: 13px 15px;
+            margin-bottom: 5px;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+
+        .menu a:hover,
+        .menu a.aktif {
+            background: #d47796;
+            color: white;
+        }
+
+        .logout {
+            margin-top: 20px;
+            border-top: 1px solid #51464d;
+            padding-top: 20px;
+        }
+
+        .logout a {
+            color: #f0b2c6 !important;
+        }
+
+        /* CONTENT */
+
+        .content {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 80px;
+            background: white;
+            border-bottom: 1px solid #eadde3;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 35px;
+        }
+
+        .topbar h2 {
+            font-family: Georgia, serif;
+            font-size: 25px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fcecf3;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-info strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .user-info span {
+            color: #927b84;
+            font-size: 11px;
+        }
+
+        /* MAIN */
+
+        main {
+            padding: 35px;
+        }
+
+        .judul {
+            margin-bottom: 25px;
+        }
+
+        .judul h1 {
+            font-family: Georgia, serif;
+            font-size: 32px;
+        }
+
+        .judul p {
+            color: #756970;
+            font-size: 13px;
+            margin-top: 7px;
+        }
+
+        /* FILTER */
+
+        .filter-box {
+            background: white;
+            border: 1px solid #eadde3;
+            border-radius: 18px;
+
+            padding: 20px;
+
+            display: flex;
+            align-items: end;
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 11px 13px;
+
+            border: 1px solid #e5c5d0;
+            border-radius: 9px;
+
+            outline: none;
+        }
+
+        .btn-tampilkan {
+            border: none;
+            background: #d47796;
+            color: white;
+
+            padding: 12px 22px;
+
+            border-radius: 22px;
+
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-tampilkan:hover {
+            background: #bd5e7e;
+        }
+
+        /* RINGKASAN */
+
+        .ringkasan {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #eadde3;
+            border-radius: 18px;
+
+            padding: 20px;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+
+            background: #fcecf3;
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #927b84;
+            font-size: 11px;
+        }
+
+        .card h3 {
+            font-family: Georgia, serif;
+            font-size: 23px;
+
+            margin-top: 5px;
+        }
+
+        /* LAPORAN */
+
+        .laporan-box {
+            background: white;
+
+            border: 1px solid #eadde3;
+            border-radius: 18px;
+
+            padding: 25px;
+
+            margin-bottom: 25px;
+        }
+
+        .laporan-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+        }
+
+        .laporan-header h2 {
+            font-family: Georgia, serif;
+            font-size: 21px;
+        }
+
+        .btn-cetak {
+            border: 1px solid #d47796;
+            background: white;
+            color: #bd5e7e;
+
+            padding: 10px 17px;
+
+            border-radius: 20px;
+
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-cetak:hover {
+            background: #d47796;
+            color: white;
+        }
+
+        /* BAR CHART */
+
+        .chart {
+            display: flex;
+
+            height: 250px;
+
+            align-items: end;
+
+            gap: 25px;
+
+            padding: 20px 10px 0;
+
+            border-bottom: 1px solid #e7dce1;
+        }
+
+        .bar-wrapper {
+            flex: 1;
+
+            height: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: end;
+
+            align-items: center;
+        }
+
+        .bar {
+            width: 55px;
+
+            background: #d47796;
+
+            border-radius: 8px 8px 0 0;
+
+            position: relative;
+
+            transition: 0.3s;
+        }
+
+        .bar:hover {
+            background: #bd5e7e;
+        }
+
+        .bar-value {
+            position: absolute;
+
+            top: -22px;
+
+            width: 100%;
+
+            text-align: center;
+
+            font-size: 10px;
+
+            font-weight: bold;
+
+            color: #bd5e7e;
+        }
+
+        .bar-label {
+            margin-top: 10px;
+
+            font-size: 10px;
+
+            color: #756970;
+        }
+
+        /* TABLE */
+
+        .table-box {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #fcecf3;
+            color: #6e4e5a;
+
+            padding: 13px;
+
+            text-align: left;
+
+            font-size: 11px;
+        }
+
+        td {
+            padding: 13px;
+
+            border-bottom: 1px solid #eee2e7;
+
+            font-size: 11px;
+        }
+
+        .total {
+            font-weight: bold;
+
+            color: #bd5e7e;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1000px) {
+
+            .ringkasan {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filter-box {
+                flex-wrap: wrap;
+            }
+
+            .form-group {
+                min-width: 200px;
+            }
+        }
+
+        @media (max-width: 750px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            .ringkasan {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-box {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .form-group {
+                width: 100%;
+            }
+
+            .laporan-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .chart {
+                gap: 10px;
+            }
+
+            .bar {
+                width: 35px;
+            }
+        }
+
+        /* CETAK */
+
+        @media print {
+
+            .sidebar,
+            .topbar,
+            .filter-box,
+            .btn-cetak {
+                display: none;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            main {
+                padding: 0;
+            }
+
+            body {
+                background: white;
+            }
+
+            .laporan-box,
+            .card {
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <h1>
+            Tasya Classic Style
+        </h1>
+
+        <p>
+            ZONA USER / ADMIN
+        </p>
+
+    </div>
+
+
+    <div class="menu">
+
+        <div class="menu-title">
+            DASHBOARD
+        </div>
+
+        <a href="dashboarduser.html">
+            🏠 Dashboard
+        </a>
+
+
+        <div class="menu-title">
+            PENGELOLAAN
+        </div>
+
+        <a href="kelolauser.html">
+            👤 Kelola User
+        </a>
+
+        <a href="kelolapelanggan.html">
+            🛍️ Kelola Pelanggan
+        </a>
+
+        <a href="kelolakategori.html">
+            🏷️ Kelola Kategori
+        </a>
+
+        <a href="kelolaproduk.html">
+            👗 Kelola Produk
+        </a>
+
+        <a href="kelolapenjualan.html">
+            🧾 Kelola Penjualan
+        </a>
+
+        <a href="keloladiskon.html">
+            🎁 Kelola Diskon
+        </a>
+
+
+        <div class="menu-title">
+            LAPORAN
+        </div>
+
+        <a href="laporan.html" class="aktif">
+            📊 Laporan
+        </a>
+
+
+        <div class="logout">
+
+            <a href="../landing/loginuser.html">
+                🚪 Keluar
+            </a>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- CONTENT -->
+
+<div class="content">
+
+    <header class="topbar">
+
+        <h2>
+            Laporan
+        </h2>
+
+
+        <div class="user-info">
+
+            <div class="user-icon">
+                👤
+            </div>
+
+            <div>
+
+                <strong>
+                    User Admin
+                </strong>
+
+                <span>
+                    Pengelola Sistem
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <div class="judul">
+
+            <h1>
+                Laporan Penjualan
+            </h1>
+
+            <p>
+                Melihat ringkasan penjualan Tasya Classic Style.
+            </p>
+
+        </div>
+
+
+        <!-- FILTER -->
+
+        <div class="filter-box">
+
+            <div class="form-group">
+
+                <label>
+                    Periode
+                </label>
+
+                <select id="periode">
+
+                    <option>
+                        Bulan Ini
+                    </option>
+
+                    <option>
+                        Bulan Lalu
+                    </option>
+
+                    <option>
+                        3 Bulan Terakhir
+                    </option>
+
+                    <option>
+                        Tahun Ini
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Dari Tanggal
+                </label>
+
+                <input
+                    type="date"
+                    id="tanggalMulai"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Sampai Tanggal
+                </label>
+
+                <input
+                    type="date"
+                    id="tanggalAkhir"
+                >
+
+            </div>
+
+
+            <button
+                class="btn-tampilkan"
+                onclick="tampilkanLaporan()"
+            >
+                Tampilkan
+            </button>
+
+        </div>
+
+
+        <!-- RINGKASAN -->
+
+        <div class="ringkasan">
+
+            <div class="card">
+
+                <div class="card-icon">
+                    💰
+                </div>
+
+                <p>
+                    Total Penjualan
+                </p>
+
+                <h3>
+                    Rp5,4 Jt
+                </h3>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🧾
+                </div>
+
+                <p>
+                    Total Pesanan
+                </p>
+
+                <h3>
+                    36
+                </h3>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    👗
+                </div>
+
+                <p>
+                    Produk Terjual
+                </p>
+
+                <h3>
+                    82
+                </h3>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    ⭐
+                </div>
+
+                <p>
+                    Rata-rata Pesanan
+                </p>
+
+                <h3>
+                    Rp150 Rb
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- GRAFIK -->
+
+        <div class="laporan-box">
+
+            <div class="laporan-header">
+
+                <h2>
+                    Penjualan Mingguan
+                </h2>
+
+                <button
+                    class="btn-cetak"
+                    onclick="cetakLaporan()"
+                >
+                    🖨 Cetak Laporan
+                </button>
+
+            </div>
+
+
+            <div class="chart">
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height: 45%;"
+                    >
+
+                        <div class="bar-value">
+                            Rp450K
+                        </div>
+
+                    </div>
+
+                    <div class="bar-label">
+                        Senin
+                    </div>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height: 65%;"
+                    >
+
+                        <div class="bar-value">
+                            Rp650K
+                        </div>
+
+                    </div>
+
+                    <div class="bar-label">
+                        Selasa
+                    </div>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height: 50%;"
+                    >
+
+                        <div class="bar-value">
+                            Rp500K
+                        </div>
+
+                    </div>
+
+                    <div class="bar-label">
+                        Rabu
+                    </div>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height: 80%;"
+                    >
+
+                        <div class="bar-value">
+                            Rp800K
+                        </div>
+
+                    </div>
+
+                    <div class="bar-label">
+                        Kamis
+                    </div>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height: 70%;"
+                    >
+
+                        <div class="bar-value">
+                            Rp700K
+                        </div>
+
+                    </div>
+
+                    <div class="bar-label">
+                        Jumat
+                    </div>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height: 95%;"
+                    >
+
+                        <div class="bar-value">
+                            Rp950K
+                        </div>
+
+                    </div>
+
+                    <div class="bar-label">
+                        Sabtu
+                    </div>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height: 60%;"
+                    >
+
+                        <div class="bar-value">
+                            Rp600K
+                        </div>
+
+                    </div>
+
+                    <div class="bar-label">
+                        Minggu
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RINCIAN -->
+
+        <div class="laporan-box">
+
+            <div class="laporan-header">
+
+                <h2>
+                    Rincian Penjualan
+                </h2>
+
+            </div>
+
+
+            <div class="table-box">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                No
+                            </th>
+
+                            <th>
+                                Produk
+                            </th>
+
+                            <th>
+                                Kategori
+                            </th>
+
+                            <th>
+                                Jumlah Terjual
+                            </th>
+
+                            <th>
+                                Harga
+                            </th>
+
+                            <th>
+                                Total
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                1
+                            </td>
+
+                            <td>
+                                Classic Blouse
+                            </td>
+
+                            <td>
+                                Atasan
+                            </td>
+
+                            <td>
+                                25
+                            </td>
+
+                            <td>
+                                Rp129.000
+                            </td>
+
+                            <td class="total">
+                                Rp3.225.000
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                2
+                            </td>
+
+                            <td>
+                                Korean Knit Top
+                            </td>
+
+                            <td>
+                                Atasan
+                            </td>
+
+                            <td>
+                                18
+                            </td>
+
+                            <td>
+                                Rp149.000
+                            </td>
+
+                            <td class="total">
+                                Rp2.682.000
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                3
+                            </td>
+
+                            <td>
+                                Classic Wide Pants
+                            </td>
+
+                            <td>
+                                Bawahan
+                            </td>
+
+                            <td>
+                                15
+                            </td>
+
+                            <td>
+                                Rp179.000
+                            </td>
+
+                            <td class="total">
+                                Rp2.685.000
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                4
+                            </td>
+
+                            <td>
+                                Vintage Cardigan
+                            </td>
+
+                            <td>
+                                Outer
+                            </td>
+
+                            <td>
+                                12
+                            </td>
+
+                            <td>
+                                Rp199.000
+                            </td>
+
+                            <td class="total">
+                                Rp2.388.000
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                5
+                            </td>
+
+                            <td>
+                                Hijab Basic Set
+                            </td>
+
+                            <td>
+                                Aksesori
+                            </td>
+
+                            <td>
+                                12
+                            </td>
+
+                            <td>
+                                Rp159.000
+                            </td>
+
+                            <td class="total">
+                                Rp1.908.000
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    function tampilkanLaporan() {
+
+        let periode =
+            document.getElementById("periode").value;
+
+        alert(
+            "Laporan untuk periode \"" +
+            periode +
+            "\" berhasil ditampilkan."
+        );
+
+    }
+
+
+    function cetakLaporan() {
+
+        window.print();
+
+    }
+
+</script>
+
+</body>
+</html>

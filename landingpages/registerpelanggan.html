@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Daftar Pelanggan - Tasya Classic Style</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8fb;
+            color: #342a2f;
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid #eadde3;
+        }
+
+        .navbar {
+            max-width: 1250px;
+            margin: auto;
+            min-height: 92px;
+            padding: 15px 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #bd5e7e;
+            min-width: 250px;
+        }
+
+        .logo h1 {
+            font-family: Georgia, serif;
+            font-size: 28px;
+            margin-bottom: 4px;
+        }
+
+        .logo p {
+            color: #927b84;
+            font-size: 10px;
+            letter-spacing: 5px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #40373b;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #d47796;
+        }
+
+        .login {
+            border: 1px solid #d47796;
+            color: #c45f80 !important;
+            padding: 11px 20px;
+            border-radius: 25px;
+        }
+
+        .daftar {
+            background: #d47796;
+            color: white !important;
+            padding: 11px 22px;
+            border-radius: 25px;
+        }
+
+        .register-section {
+            min-height: calc(100vh - 92px);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 50px 20px;
+
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    #f5d6e2 0,
+                    #f5d6e2 100px,
+                    transparent 101px
+                ),
+                radial-gradient(
+                    circle at 90% 80%,
+                    #f0dce7 0,
+                    #f0dce7 130px,
+                    transparent 131px
+                ),
+                #fff8fb;
+        }
+
+        .register-box {
+            width: 100%;
+            max-width: 500px;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 28px;
+
+            border: 1px solid #eadde3;
+
+            box-shadow:
+                0 20px 50px rgba(90, 45, 65, 0.10);
+        }
+
+        .icon {
+            width: 65px;
+            height: 65px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: #fcecf3;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 30px;
+        }
+
+        .register-box h2 {
+            text-align: center;
+
+            font-family: Georgia, serif;
+
+            font-size: 38px;
+        }
+
+        .register-box h2 span {
+            color: #c96182;
+            font-style: italic;
+        }
+
+        .subjudul {
+            text-align: center;
+
+            color: #756970;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            margin: 10px 0 25px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1px solid #e5c5d0;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 13px;
+        }
+
+        .form-group input:focus {
+            border-color: #d47796;
+
+            box-shadow:
+                0 0 0 3px #fcecf3;
+        }
+
+        .btn-daftar {
+            width: 100%;
+
+            border: none;
+
+            padding: 14px;
+
+            border-radius: 25px;
+
+            background: #d47796;
+
+            color: white;
+
+            font-weight: bold;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+        }
+
+        .btn-daftar:hover {
+            background: #bd5e7e;
+        }
+
+        .login-link {
+            text-align: center;
+
+            margin-top: 22px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #eee2e7;
+
+            color: #756970;
+
+            font-size: 13px;
+        }
+
+        .login-link a {
+            color: #c45f80;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .kembali {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 18px;
+
+            color: #756970;
+
+            text-decoration: none;
+
+            font-size: 12px;
+        }
+
+        .kembali:hover {
+            color: #c45f80;
+        }
+
+        #pesan {
+            display: none;
+
+            padding: 12px;
+
+            margin-bottom: 18px;
+
+            border-radius: 10px;
+
+            background: #fcecf3;
+
+            color: #bd5e7e;
+
+            text-align: center;
+
+            font-size: 12px;
+        }
+
+        footer {
+            background: #292329;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 30px 20px;
+        }
+
+        footer h3 {
+            font-family: Georgia, serif;
+
+            color: #e49ab3;
+
+            font-size: 24px;
+        }
+
+        footer p {
+            color: #cdbfc5;
+
+            font-size: 12px;
+
+            margin-top: 7px;
+        }
+
+        @media (max-width: 900px) {
+
+            .navbar {
+                flex-direction: column;
+            }
+
+            .logo {
+                text-align: center;
+            }
+
+        }
+
+        @media (max-width: 550px) {
+
+            nav {
+                gap: 12px;
+                justify-content: center;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .register-box {
+                padding: 30px 22px;
+            }
+
+            .register-box h2 {
+                font-size: 32px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="navbar">
+
+        <a href="../../index.html" class="logo">
+
+            <h1>
+                Tasya Classic Style
+            </h1>
+
+            <p>
+                OOTD • YOUTH • CLASSIC
+            </p>
+
+        </a>
+
+        <nav>
+
+            <a href="beranda.html">
+                Beranda
+            </a>
+
+            <a href="kategori.html">
+                Kategori
+            </a>
+
+            <a href="produk.html">
+                Produk
+            </a>
+
+            <a href="faq.html">
+                FAQ
+            </a>
+
+            <a href="kontak.html">
+                Kontak
+            </a>
+
+            <a href="legalitas.html">
+                Legalitas
+            </a>
+
+            <a href="loginpelanggan.html" class="login">
+                Login Pelanggan
+            </a>
+
+            <a href="registerpelanggan.html" class="daftar">
+                Daftar
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<section class="register-section">
+
+    <div class="register-box">
+
+        <div class="icon">
+            🛍️
+        </div>
+
+        <h2>
+            Daftar <span>Pelanggan</span>
+        </h2>
+
+        <p class="subjudul">
+            Buat akun pelanggan untuk membeli
+            produk dan melihat riwayat pembelian.
+        </p>
+
+        <div id="pesan"></div>
+
+        <form onsubmit="daftarPelanggan(event)">
+
+            <div class="form-group">
+
+                <label>
+                    Nama Lengkap
+                </label>
+
+                <input
+                    type="text"
+                    id="nama"
+                    placeholder="Masukkan nama lengkap"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Masukkan email"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Nomor Telepon
+                </label>
+
+                <input
+                    type="tel"
+                    id="telepon"
+                    placeholder="Masukkan nomor telepon"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Kata Sandi
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Buat kata sandi"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Konfirmasi Kata Sandi
+                </label>
+
+                <input
+                    type="password"
+                    id="konfirmasi"
+                    placeholder="Ulangi kata sandi"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn-daftar"
+            >
+                Daftar Sekarang
+            </button>
+
+        </form>
+
+        <div class="login-link">
+
+            Sudah punya akun?
+
+            <a href="loginpelanggan.html">
+                Login di sini
+            </a>
+
+        </div>
+
+        <a
+            href="beranda.html"
+            class="kembali"
+        >
+            ← Kembali ke Beranda
+        </a>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <h3>
+        Tasya Classic Style
+    </h3>
+
+    <p>
+        OOTD • YOUTH • CLASSIC
+    </p>
+
+    <p>
+        © 2026 Tasya Classic Style
+    </p>
+
+</footer>
+
+
+<script>
+
+    function daftarPelanggan(event) {
+
+        event.preventDefault();
+
+        let nama =
+            document.getElementById("nama").value;
+
+        let email =
+            document.getElementById("email").value;
+
+        let telepon =
+            document.getElementById("telepon").value;
+
+        let password =
+            document.getElementById("password").value;
+
+        let konfirmasi =
+            document.getElementById("konfirmasi").value;
+
+        let pesan =
+            document.getElementById("pesan");
+
+
+        if (password !== konfirmasi) {
+
+            pesan.style.display = "block";
+
+            pesan.innerHTML =
+                "Kata sandi dan konfirmasi kata sandi tidak sama.";
+
+            return;
+        }
+
+
+        if (
+            nama !== "" &&
+            email !== "" &&
+            telepon !== "" &&
+            password !== ""
+        ) {
+
+            pesan.style.display = "block";
+
+            pesan.innerHTML =
+                "Pendaftaran berhasil! Silakan login sebagai pelanggan.";
+
+            setTimeout(function() {
+
+                window.location.href =
+                    "loginpelanggan.html";
+
+            }, 1200);
+
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kelola User - Tasya Classic Style</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8fb;
+            color: #342a2f;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 250px;
+            height: 100vh;
+
+            background: #292329;
+            padding: 25px 18px;
+
+            overflow-y: auto;
+        }
+
+        .logo {
+            text-align: center;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #51464d;
+        }
+
+        .logo h1 {
+            font-family: Georgia, serif;
+            color: #e49ab3;
+            font-size: 25px;
+        }
+
+        .logo p {
+            color: #cdbfc5;
+            font-size: 9px;
+            letter-spacing: 3px;
+            margin-top: 5px;
+        }
+
+        .menu-title {
+            color: #a99aa1;
+            font-size: 10px;
+            font-weight: bold;
+            margin: 25px 10px 10px;
+            letter-spacing: 2px;
+        }
+
+        .menu a {
+            display: block;
+            color: #eee3e8;
+            text-decoration: none;
+
+            padding: 13px 15px;
+            margin-bottom: 5px;
+
+            border-radius: 10px;
+            font-size: 13px;
+        }
+
+        .menu a:hover,
+        .menu a.aktif {
+            background: #d47796;
+            color: white;
+        }
+
+        .logout {
+            margin-top: 20px;
+            border-top: 1px solid #51464d;
+            padding-top: 20px;
+        }
+
+        .logout a {
+            color: #f0b2c6 !important;
+        }
+
+        /* CONTENT */
+
+        .content {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 80px;
+            background: white;
+            border-bottom: 1px solid #eadde3;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 35px;
+        }
+
+        .topbar h2 {
+            font-family: Georgia, serif;
+            font-size: 25px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-icon {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+            background: #fcecf3;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-info strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .user-info span {
+            color: #927b84;
+            font-size: 11px;
+        }
+
+        /* MAIN */
+
+        main {
+            padding: 35px;
+        }
+
+        .judul {
+            margin-bottom: 25px;
+        }
+
+        .judul h1 {
+            font-family: Georgia, serif;
+            font-size: 32px;
+        }
+
+        .judul p {
+            color: #756970;
+            font-size: 13px;
+            margin-top: 7px;
+        }
+
+        /* TOOLBAR */
+
+        .toolbar {
+            background: white;
+            border: 1px solid #eadde3;
+            border-radius: 18px;
+
+            padding: 18px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .cari {
+            width: 300px;
+            padding: 12px 15px;
+
+            border: 1px solid #e5c5d0;
+            border-radius: 10px;
+
+            outline: none;
+        }
+
+        .cari:focus {
+            border-color: #d47796;
+        }
+
+        .btn-tambah {
+            border: none;
+            background: #d47796;
+            color: white;
+
+            padding: 12px 20px;
+            border-radius: 22px;
+
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-tambah:hover {
+            background: #bd5e7e;
+        }
+
+        /* TABLE */
+
+        .table-box {
+            background: white;
+            border: 1px solid #eadde3;
+            border-radius: 18px;
+
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 750px;
+        }
+
+        th {
+            background: #fcecf3;
+            color: #6e4e5a;
+
+            padding: 15px;
+
+            text-align: left;
+
+            font-size: 12px;
+        }
+
+        td {
+            padding: 15px;
+
+            border-bottom: 1px solid #eee2e7;
+
+            font-size: 12px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            background: #e8f6ed;
+            color: #438157;
+
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .aksi {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-edit,
+        .btn-hapus {
+            border: none;
+            padding: 7px 11px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 11px;
+        }
+
+        .btn-edit {
+            background: #fcecf3;
+            color: #bd5e7e;
+        }
+
+        .btn-hapus {
+            background: #f9e3e3;
+            color: #b84b4b;
+        }
+
+        /* MODAL */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(40, 30, 35, 0.45);
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 999;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 450px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 30px;
+        }
+
+        .modal-box h2 {
+            font-family: Georgia, serif;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #e5c5d0;
+
+            border-radius: 9px;
+
+            outline: none;
+        }
+
+        .modal-aksi {
+            display: flex;
+            gap: 10px;
+
+            margin-top: 20px;
+        }
+
+        .modal-aksi button {
+            flex: 1;
+
+            padding: 12px;
+
+            border: none;
+
+            border-radius: 20px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .simpan {
+            background: #d47796;
+            color: white;
+        }
+
+        .batal {
+            background: #eee6e9;
+            color: #5e5157;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 750px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .cari {
+                width: 100%;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <h1>
+            Tasya Classic Style
+        </h1>
+
+        <p>
+            ZONA USER / ADMIN
+        </p>
+
+    </div>
+
+
+    <div class="menu">
+
+        <div class="menu-title">
+            DASHBOARD
+        </div>
+
+        <a href="dashboarduser.html">
+            🏠 Dashboard
+        </a>
+
+
+        <div class="menu-title">
+            PENGELOLAAN
+        </div>
+
+        <a href="kelolauser.html" class="aktif">
+            👤 Kelola User
+        </a>
+
+        <a href="kelolapelanggan.html">
+            🛍️ Kelola Pelanggan
+        </a>
+
+        <a href="kelolakategori.html">
+            🏷️ Kelola Kategori
+        </a>
+
+        <a href="kelolaproduk.html">
+            👗 Kelola Produk
+        </a>
+
+        <a href="kelolapenjualan.html">
+            🧾 Kelola Penjualan
+        </a>
+
+        <a href="keloladiskon.html">
+            🎁 Kelola Diskon
+        </a>
+
+
+        <div class="menu-title">
+            LAPORAN
+        </div>
+
+        <a href="laporan.html">
+            📊 Laporan
+        </a>
+
+
+        <div class="logout">
+
+            <a href="../landing/loginuser.html">
+                🚪 Keluar
+            </a>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= CONTENT ================= -->
+
+<div class="content">
+
+
+    <header class="topbar">
+
+        <h2>
+            Kelola User
+        </h2>
+
+        <div class="user-info">
+
+            <div class="user-icon">
+                👤
+            </div>
+
+            <div>
+
+                <strong>
+                    User Admin
+                </strong>
+
+                <span>
+                    Pengelola Sistem
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+
+        <div class="judul">
+
+            <h1>
+                Kelola User
+            </h1>
+
+            <p>
+                Tambah, ubah, cari, dan hapus data user.
+            </p>
+
+        </div>
+
+
+        <!-- TOOLBAR -->
+
+        <div class="toolbar">
+
+            <input
+                type="text"
+                id="cari"
+                class="cari"
+                placeholder="Cari nama atau nama pengguna..."
+                onkeyup="cariUser()"
+            >
+
+            <button
+                class="btn-tambah"
+                onclick="bukaTambah()"
+            >
+                + Tambah User
+            </button>
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <div class="table-box">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            No
+                        </th>
+
+                        <th>
+                            Nama
+                        </th>
+
+                        <th>
+                            Nama Pengguna
+                        </th>
+
+                        <th>
+                            Peran
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Aksi
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="dataUser">
+
+                    <tr>
+
+                        <td>
+                            1
+                        </td>
+
+                        <td>
+                            Tasya Aulia Putri
+                        </td>
+
+                        <td>
+                            tasyaadmin
+                        </td>
+
+                        <td>
+                            Admin
+                        </td>
+
+                        <td>
+                            <span class="status">
+                                Aktif
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <div class="aksi">
+
+                                <button
+                                    class="btn-edit"
+                                    onclick="editUser(this)"
+                                >
+                                    Edit
+                                </button>
+
+                                <button
+                                    class="btn-hapus"
+                                    onclick="hapusUser(this)"
+                                >
+                                    Hapus
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            2
+                        </td>
+
+                        <td>
+                            Admin Fashion
+                        </td>
+
+                        <td>
+                            adminfashion
+                        </td>
+
+                        <td>
+                            Admin
+                        </td>
+
+                        <td>
+                            <span class="status">
+                                Aktif
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <div class="aksi">
+
+                                <button
+                                    class="btn-edit"
+                                    onclick="editUser(this)"
+                                >
+                                    Edit
+                                </button>
+
+                                <button
+                                    class="btn-hapus"
+                                    onclick="hapusUser(this)"
+                                >
+                                    Hapus
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- ================= MODAL ================= -->
+
+<div
+    class="modal"
+    id="modal"
+>
+
+    <div class="modal-box">
+
+        <h2>
+            Tambah User
+        </h2>
+
+
+        <div class="form-group">
+
+            <label>
+                Nama Lengkap
+            </label>
+
+            <input
+                type="text"
+                id="nama"
+                placeholder="Masukkan nama"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Nama Pengguna
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Masukkan nama pengguna"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Peran
+            </label>
+
+            <select id="peran">
+
+                <option>
+                    Admin
+                </option>
+
+                <option>
+                    User
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="modal-aksi">
+
+            <button
+                class="batal"
+                onclick="tutupModal()"
+            >
+                Batal
+            </button>
+
+            <button
+                class="simpan"
+                onclick="simpanUser()"
+            >
+                Simpan
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    let barisEdit = null;
+
+
+    function bukaTambah() {
+
+        barisEdit = null;
+
+        document.querySelector(".modal-box h2").innerHTML =
+            "Tambah User";
+
+        document.getElementById("nama").value = "";
+        document.getElementById("username").value = "";
+
+        document.getElementById("modal").style.display =
+            "flex";
+
+    }
+
+
+    function tutupModal() {
+
+        document.getElementById("modal").style.display =
+            "none";
+
+    }
+
+
+    function simpanUser() {
+
+        let nama =
+            document.getElementById("nama").value;
+
+        let username =
+            document.getElementById("username").value;
+
+        let peran =
+            document.getElementById("peran").value;
+
+
+        if (nama === "" || username === "") {
+
+            alert("Nama dan nama pengguna harus diisi.");
+
+            return;
+
+        }
+
+
+        if (barisEdit !== null) {
+
+            barisEdit.cells[1].innerHTML = nama;
+            barisEdit.cells[2].innerHTML = username;
+            barisEdit.cells[3].innerHTML = peran;
+
+        } else {
+
+            let tabel =
+                document.getElementById("dataUser");
+
+            let nomor =
+                tabel.rows.length + 1;
+
+
+            let baris =
+                tabel.insertRow();
+
+
+            baris.innerHTML = `
+
+                <td>
+                    ${nomor}
+                </td>
+
+                <td>
+                    ${nama}
+                </td>
+
+                <td>
+                    ${username}
+                </td>
+
+                <td>
+                    ${peran}
+                </td>
+
+                <td>
+                    <span class="status">
+                        Aktif
+                    </span>
+                </td>
+
+                <td>
+
+                    <div class="aksi">
+
+                        <button
+                            class="btn-edit"
+                            onclick="editUser(this)"
+                        >
+                            Edit
+                        </button>
+
+                        <button
+                            class="btn-hapus"
+                            onclick="hapusUser(this)"
+                        >
+                            Hapus
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+        }
+
+
+        tutupModal();
+
+    }
+
+
+    function editUser(tombol) {
+
+        barisEdit =
+            tombol.closest("tr");
+
+
+        document.querySelector(".modal-box h2").innerHTML =
+            "Edit User";
+
+
+        document.getElementById("nama").value =
+            barisEdit.cells[1].innerText;
+
+
+        document.getElementById("username").value =
+            barisEdit.cells[2].innerText;
+
+
+        document.getElementById("peran").value =
+            barisEdit.cells[3].innerText;
+
+
+        document.getElementById("modal").style.display =
+            "flex";
+
+    }
+
+
+    function hapusUser(tombol) {
+
+        let konfirmasi =
+            confirm(
+                "Apakah kamu yakin ingin menghapus user ini?"
+            );
+
+
+        if (konfirmasi) {
+
+            tombol.closest("tr").remove();
+
+            aturNomor();
+
+        }
+
+    }
+
+
+    function aturNomor() {
+
+        let baris =
+            document.querySelectorAll("#dataUser tr");
+
+
+        baris.forEach(function(row, index) {
+
+            row.cells[0].innerHTML =
+                index + 1;
+
+        });
+
+    }
+
+
+    function cariUser() {
+
+        let input =
+            document.getElementById("cari").value
+            .toLowerCase();
+
+
+        let baris =
+            document.querySelectorAll("#dataUser tr");
+
+
+        baris.forEach(function(row) {
+
+            let teks =
+                row.innerText.toLowerCase();
+
+
+            if (teks.includes(input)) {
+
+                row.style.display = "";
+
+            } else {
+
+                row.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+</script>
+
+</body>
+</html>

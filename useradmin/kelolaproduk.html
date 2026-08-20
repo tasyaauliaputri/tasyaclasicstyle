@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kelola Produk - Tasya Classic Style</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8fb;
+            color: #342a2f;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #292329;
+            padding: 25px 18px;
+            overflow-y: auto;
+        }
+
+        .logo {
+            text-align: center;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #51464d;
+        }
+
+        .logo h1 {
+            font-family: Georgia, serif;
+            color: #e49ab3;
+            font-size: 25px;
+        }
+
+        .logo p {
+            color: #cdbfc5;
+            font-size: 9px;
+            letter-spacing: 3px;
+            margin-top: 5px;
+        }
+
+        .menu-title {
+            color: #a99aa1;
+            font-size: 10px;
+            font-weight: bold;
+            margin: 25px 10px 10px;
+            letter-spacing: 2px;
+        }
+
+        .menu a {
+            display: block;
+            color: #eee3e8;
+            text-decoration: none;
+            padding: 13px 15px;
+            margin-bottom: 5px;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+
+        .menu a:hover,
+        .menu a.aktif {
+            background: #d47796;
+            color: white;
+        }
+
+        .logout {
+            margin-top: 20px;
+            border-top: 1px solid #51464d;
+            padding-top: 20px;
+        }
+
+        .logout a {
+            color: #f0b2c6 !important;
+        }
+
+        /* CONTENT */
+
+        .content {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 80px;
+            background: white;
+            border-bottom: 1px solid #eadde3;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 35px;
+        }
+
+        .topbar h2 {
+            font-family: Georgia, serif;
+            font-size: 25px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fcecf3;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-info strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .user-info span {
+            color: #927b84;
+            font-size: 11px;
+        }
+
+        /* MAIN */
+
+        main {
+            padding: 35px;
+        }
+
+        .judul {
+            margin-bottom: 25px;
+        }
+
+        .judul h1 {
+            font-family: Georgia, serif;
+            font-size: 32px;
+        }
+
+        .judul p {
+            color: #756970;
+            font-size: 13px;
+            margin-top: 7px;
+        }
+
+        /* TOOLBAR */
+
+        .toolbar {
+            background: white;
+            border: 1px solid #eadde3;
+            border-radius: 18px;
+            padding: 18px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .cari {
+            width: 350px;
+            padding: 12px 15px;
+
+            border: 1px solid #e5c5d0;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .cari:focus {
+            border-color: #d47796;
+        }
+
+        .btn-tambah {
+            border: none;
+            background: #d47796;
+            color: white;
+
+            padding: 12px 20px;
+            border-radius: 22px;
+
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-tambah:hover {
+            background: #bd5e7e;
+        }
+
+        /* TABLE */
+
+        .table-box {
+            background: white;
+            border: 1px solid #eadde3;
+            border-radius: 18px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1050px;
+        }
+
+        th {
+            background: #fcecf3;
+            color: #6e4e5a;
+            padding: 15px;
+            text-align: left;
+            font-size: 12px;
+        }
+
+        td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #eee2e7;
+            font-size: 12px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .produk {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .foto-produk {
+            width: 55px;
+            height: 65px;
+
+            border-radius: 10px;
+
+            background: #fcecf3;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+        }
+
+        .nama-produk {
+            font-weight: bold;
+        }
+
+        .kategori {
+            color: #bd5e7e;
+            background: #fcecf3;
+
+            padding: 6px 10px;
+            border-radius: 15px;
+
+            font-size: 10px;
+        }
+
+        .harga {
+            font-weight: bold;
+            color: #bd5e7e;
+        }
+
+        .stok {
+            font-weight: bold;
+        }
+
+        .stok-habis {
+            color: #b84b4b;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .aktif {
+            background: #e8f6ed;
+            color: #438157;
+        }
+
+        .nonaktif {
+            background: #f9e3e3;
+            color: #b84b4b;
+        }
+
+        .aksi {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-edit,
+        .btn-hapus {
+            border: none;
+            padding: 7px 11px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .btn-edit {
+            background: #fcecf3;
+            color: #bd5e7e;
+        }
+
+        .btn-hapus {
+            background: #f9e3e3;
+            color: #b84b4b;
+        }
+
+        /* MODAL */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+            inset: 0;
+
+            background: rgba(40, 30, 35, 0.45);
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 999;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: white;
+            border-radius: 20px;
+
+            padding: 30px;
+        }
+
+        .modal-box h2 {
+            font-family: Georgia, serif;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #e5c5d0;
+
+            border-radius: 9px;
+
+            outline: none;
+        }
+
+        .dua-kolom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .modal-aksi {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-aksi button {
+            flex: 1;
+
+            padding: 12px;
+
+            border: none;
+
+            border-radius: 20px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .simpan {
+            background: #d47796;
+            color: white;
+        }
+
+        .batal {
+            background: #eee6e9;
+            color: #5e5157;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 750px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .cari {
+                width: 100%;
+            }
+
+            .dua-kolom {
+                grid-template-columns: 1fr;
+            }
+
+            main {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <h1>
+            Tasya Classic Style
+        </h1>
+
+        <p>
+            ZONA USER / ADMIN
+        </p>
+
+    </div>
+
+
+    <div class="menu">
+
+        <div class="menu-title">
+            DASHBOARD
+        </div>
+
+        <a href="dashboarduser.html">
+            🏠 Dashboard
+        </a>
+
+
+        <div class="menu-title">
+            PENGELOLAAN
+        </div>
+
+        <a href="kelolauser.html">
+            👤 Kelola User
+        </a>
+
+        <a href="kelolapelanggan.html">
+            🛍️ Kelola Pelanggan
+        </a>
+
+        <a href="kelolakategori.html">
+            🏷️ Kelola Kategori
+        </a>
+
+        <a href="kelolaproduk.html" class="aktif">
+            👗 Kelola Produk
+        </a>
+
+        <a href="kelolapenjualan.html">
+            🧾 Kelola Penjualan
+        </a>
+
+        <a href="keloladiskon.html">
+            🎁 Kelola Diskon
+        </a>
+
+
+        <div class="menu-title">
+            LAPORAN
+        </div>
+
+        <a href="laporan.html">
+            📊 Laporan
+        </a>
+
+
+        <div class="logout">
+
+            <a href="../landing/loginuser.html">
+                🚪 Keluar
+            </a>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- CONTENT -->
+
+<div class="content">
+
+    <header class="topbar">
+
+        <h2>
+            Kelola Produk
+        </h2>
+
+        <div class="user-info">
+
+            <div class="user-icon">
+                👤
+            </div>
+
+            <div>
+
+                <strong>
+                    User Admin
+                </strong>
+
+                <span>
+                    Pengelola Sistem
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <div class="judul">
+
+            <h1>
+                Kelola Produk
+            </h1>
+
+            <p>
+                Mengatur koleksi outfit Tasya Classic Style.
+            </p>
+
+        </div>
+
+
+        <!-- TOOLBAR -->
+
+        <div class="toolbar">
+
+            <input
+                type="text"
+                id="cari"
+                class="cari"
+                placeholder="Cari nama produk atau kategori..."
+                onkeyup="cariProduk()"
+            >
+
+            <button
+                class="btn-tambah"
+                onclick="bukaTambah()"
+            >
+                + Tambah Produk
+            </button>
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <div class="table-box">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            No
+                        </th>
+
+                        <th>
+                            Produk
+                        </th>
+
+                        <th>
+                            Kategori
+                        </th>
+
+                        <th>
+                            Harga
+                        </th>
+
+                        <th>
+                            Ukuran
+                        </th>
+
+                        <th>
+                            Warna
+                        </th>
+
+                        <th>
+                            Stok
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Aksi
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="dataProduk">
+
+                    <tr>
+
+                        <td>1</td>
+
+                        <td>
+
+                            <div class="produk">
+
+                                <div class="foto-produk">
+                                    👗
+                                </div>
+
+                                <div class="nama-produk">
+                                    Classic Blouse
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <span class="kategori">
+                                Casual
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="harga">
+                                Rp129.000
+                            </span>
+                        </td>
+
+                        <td>
+                            S, M, L
+                        </td>
+
+                        <td>
+                            Pink
+                        </td>
+
+                        <td class="stok">
+                            15
+                        </td>
+
+                        <td>
+                            <span class="status aktif">
+                                Aktif
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <div class="aksi">
+
+                                <button
+                                    class="btn-edit"
+                                    onclick="editProduk(this)"
+                                >
+                                    Edit
+                                </button>
+
+                                <button
+                                    class="btn-hapus"
+                                    onclick="hapusProduk(this)"
+                                >
+                                    Hapus
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>2</td>
+
+                        <td>
+
+                            <div class="produk">
+
+                                <div class="foto-produk">
+                                    👚
+                                </div>
+
+                                <div class="nama-produk">
+                                    Korean Knit Top
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <span class="kategori">
+                                Korean Style
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="harga">
+                                Rp149.000
+                            </span>
+                        </td>
+
+                        <td>
+                            S, M, L
+                        </td>
+
+                        <td>
+                            Cream
+                        </td>
+
+                        <td class="stok">
+                            12
+                        </td>
+
+                        <td>
+                            <span class="status aktif">
+                                Aktif
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <div class="aksi">
+
+                                <button
+                                    class="btn-edit"
+                                    onclick="editProduk(this)"
+                                >
+                                    Edit
+                                </button>
+
+                                <button
+                                    class="btn-hapus"
+                                    onclick="hapusProduk(this)"
+                                >
+                                    Hapus
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>3</td>
+
+                        <td>
+
+                            <div class="produk">
+
+                                <div class="foto-produk">
+                                    👖
+                                </div>
+
+                                <div class="nama-produk">
+                                    Classic Wide Pants
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <span class="kategori">
+                                Vintage
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="harga">
+                                Rp179.000
+                            </span>
+                        </td>
+
+                        <td>
+                            S, M, L, XL
+                        </td>
+
+                        <td>
+                            Cokelat
+                        </td>
+
+                        <td class="stok">
+                            8
+                        </td>
+
+                        <td>
+                            <span class="status aktif">
+                                Aktif
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <div class="aksi">
+
+                                <button
+                                    class="btn-edit"
+                                    onclick="editProduk(this)"
+                                >
+                                    Edit
+                                </button>
+
+                                <button
+                                    class="btn-hapus"
+                                    onclick="hapusProduk(this)"
+                                >
+                                    Hapus
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div
+    class="modal"
+    id="modal"
+>
+
+    <div class="modal-box">
+
+        <h2>
+            Tambah Produk
+        </h2>
+
+
+        <div class="form-group">
+
+            <label>
+                Nama Produk
+            </label>
+
+            <input
+                type="text"
+                id="nama"
+                placeholder="Contoh: Classic Blouse"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Kategori
+            </label>
+
+            <select id="kategori">
+
+                <option>
+                    Casual
+                </option>
+
+                <option>
+                    Korean Style
+                </option>
+
+                <option>
+                    Vintage
+                </option>
+
+                <option>
+                    Hijab Style
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="dua-kolom">
+
+            <div class="form-group">
+
+                <label>
+                    Harga
+                </label>
+
+                <input
+                    type="number"
+                    id="harga"
+                    placeholder="129000"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Stok
+                </label>
+
+                <input
+                    type="number"
+                    id="stok"
+                    placeholder="10"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Ukuran
+            </label>
+
+            <input
+                type="text"
+                id="ukuran"
+                placeholder="Contoh: S, M, L"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Warna
+            </label>
+
+            <input
+                type="text"
+                id="warna"
+                placeholder="Contoh: Pink"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Status
+            </label>
+
+            <select id="status">
+
+                <option value="Aktif">
+                    Aktif
+                </option>
+
+                <option value="Nonaktif">
+                    Nonaktif
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="modal-aksi">
+
+            <button
+                class="batal"
+                onclick="tutupModal()"
+            >
+                Batal
+            </button>
+
+            <button
+                class="simpan"
+                onclick="simpanProduk()"
+            >
+                Simpan
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    let barisEdit = null;
+
+
+    function bukaTambah() {
+
+        barisEdit = null;
+
+        document.querySelector(".modal-box h2").innerHTML =
+            "Tambah Produk";
+
+        document.getElementById("nama").value = "";
+        document.getElementById("harga").value = "";
+        document.getElementById("stok").value = "";
+        document.getElementById("ukuran").value = "";
+        document.getElementById("warna").value = "";
+        document.getElementById("kategori").value = "Casual";
+        document.getElementById("status").value = "Aktif";
+
+        document.getElementById("modal").style.display =
+            "flex";
+    }
+
+
+    function tutupModal() {
+
+        document.getElementById("modal").style.display =
+            "none";
+    }
+
+
+    function formatRupiah(angka) {
+
+        return "Rp" +
+            Number(angka).toLocaleString("id-ID");
+
+    }
+
+
+    function simpanProduk() {
+
+        let nama =
+            document.getElementById("nama").value;
+
+        let kategori =
+            document.getElementById("kategori").value;
+
+        let harga =
+            document.getElementById("harga").value;
+
+        let stok =
+            document.getElementById("stok").value;
+
+        let ukuran =
+            document.getElementById("ukuran").value;
+
+        let warna =
+            document.getElementById("warna").value;
+
+        let status =
+            document.getElementById("status").value;
+
+
+        if (
+            nama === "" ||
+            harga === "" ||
+            stok === "" ||
+            ukuran === "" ||
+            warna === ""
+        ) {
+
+            alert("Semua data produk harus diisi.");
+
+            return;
+        }
+
+
+        if (barisEdit !== null) {
+
+            barisEdit.cells[1].querySelector(".nama-produk").innerHTML =
+                nama;
+
+            barisEdit.cells[2].innerHTML =
+                '<span class="kategori">' +
+                kategori +
+                '</span>';
+
+            barisEdit.cells[3].innerHTML =
+                '<span class="harga">' +
+                formatRupiah(harga) +
+                '</span>';
+
+            barisEdit.cells[4].innerHTML =
+                ukuran;
+
+            barisEdit.cells[5].innerHTML =
+                warna;
+
+            barisEdit.cells[6].innerHTML =
+                stok;
+
+
+            let kelas =
+                status === "Aktif"
+                ? "aktif"
+                : "nonaktif";
+
+
+            barisEdit.cells[7].innerHTML =
+                '<span class="status ' +
+                kelas +
+                '">' +
+                status +
+                '</span>';
+
+        } else {
+
+            let tabel =
+                document.getElementById("dataProduk");
+
+            let nomor =
+                tabel.rows.length + 1;
+
+            let baris =
+                tabel.insertRow();
+
+
+            let kelas =
+                status === "Aktif"
+                ? "aktif"
+                : "nonaktif";
+
+
+            baris.innerHTML = `
+
+                <td>
+                    ${nomor}
+                </td>
+
+                <td>
+
+                    <div class="produk">
+
+                        <div class="foto-produk">
+                            👗
+                        </div>
+
+                        <div class="nama-produk">
+                            ${nama}
+                        </div>
+
+                    </div>
+
+                </td>
+
+                <td>
+                    <span class="kategori">
+                        ${kategori}
+                    </span>
+                </td>
+
+                <td>
+                    <span class="harga">
+                        ${formatRupiah(harga)}
+                    </span>
+                </td>
+
+                <td>
+                    ${ukuran}
+                </td>
+
+                <td>
+                    ${warna}
+                </td>
+
+                <td class="stok">
+                    ${stok}
+                </td>
+
+                <td>
+                    <span class="status ${kelas}">
+                        ${status}
+                    </span>
+                </td>
+
+                <td>
+
+                    <div class="aksi">
+
+                        <button
+                            class="btn-edit"
+                            onclick="editProduk(this)"
+                        >
+                            Edit
+                        </button>
+
+                        <button
+                            class="btn-hapus"
+                            onclick="hapusProduk(this)"
+                        >
+                            Hapus
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+        }
+
+
+        tutupModal();
+
+    }
+
+
+    function editProduk(tombol) {
+
+        barisEdit =
+            tombol.closest("tr");
+
+
+        document.querySelector(".modal-box h2").innerHTML =
+            "Edit Produk";
+
+
+        document.getElementById("nama").value =
+            barisEdit.cells[1]
+            .querySelector(".nama-produk")
+            .innerText;
+
+
+        document.getElementById("kategori").value =
+            barisEdit.cells[2].innerText.trim();
+
+
+        let harga =
+            barisEdit.cells[3].innerText
+            .replace("Rp", "")
+            .replace(/\./g, "");
+
+
+        document.getElementById("harga").value =
+            harga;
+
+
+        document.getElementById("ukuran").value =
+            barisEdit.cells[4].innerText;
+
+
+        document.getElementById("warna").value =
+            barisEdit.cells[5].innerText;
+
+
+        document.getElementById("stok").value =
+            barisEdit.cells[6].innerText;
+
+
+        document.getElementById("status").value =
+            barisEdit.cells[7].innerText.trim();
+
+
+        document.getElementById("modal").style.display =
+            "flex";
+
+    }
+
+
+    function hapusProduk(tombol) {
+
+        let yakin =
+            confirm(
+                "Apakah kamu yakin ingin menghapus produk ini?"
+            );
+
+
+        if (yakin) {
+
+            tombol.closest("tr").remove();
+
+            aturNomor();
+
+        }
+
+    }
+
+
+    function aturNomor() {
+
+        let baris =
+            document.querySelectorAll(
+                "#dataProduk tr"
+            );
+
+
+        baris.forEach(function(row, index) {
+
+            row.cells[0].innerHTML =
+                index + 1;
+
+        });
+
+    }
+
+
+    function cariProduk() {
+
+        let input =
+            document.getElementById("cari")
+            .value
+            .toLowerCase();
+
+
+        let baris =
+            document.querySelectorAll(
+                "#dataProduk tr"
+            );
+
+
+        baris.forEach(function(row) {
+
+            let teks =
+                row.innerText.toLowerCase();
+
+
+            if (teks.includes(input)) {
+
+                row.style.display = "";
+
+            } else {
+
+                row.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+</script>
+
+</body>
+</html>
