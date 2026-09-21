@@ -1,1 +1,1 @@
-link website : https://github.com/tasyaauliaputri/tasyaclasicstyle.git
+link website : https://tasyaauliaputri.github.io/tasyaclasicstyle/
